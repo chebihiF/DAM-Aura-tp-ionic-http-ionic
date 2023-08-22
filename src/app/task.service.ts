@@ -39,10 +39,10 @@ export class TaskService {
         console.log(resData)
         for(const key in resData){
           if(resData.hasOwnProperty(key)){
-            const t:Task = new Task(resData[key].title, resData[key].description, new Date(resData[key].startDate),
+            const task:Task = new Task(resData[key].title, resData[key].description, new Date(resData[key].startDate),
                         new Date(resData[key].endDate), +resData[key].priority)
-            t.id = key
-            this._tasks.push(t)
+            task.id = key
+            this._tasks.push(task)
           }
         }
       }))
