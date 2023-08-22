@@ -11,7 +11,7 @@ export class TaskService {
   baseUrl = "https://ionic-app-dam-default-rtdb.firebaseio.com/"
 
   saveTask(task: Task){
-    this.http
+    return this.http
     .post(this.baseUrl+'tasks.json',task)
     .pipe(tap(resData => {
       console.log(resData)

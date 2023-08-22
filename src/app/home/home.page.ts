@@ -17,7 +17,7 @@ export class HomePage {
       startDate: new Date(),
       endDate: new Date(),
       priority: 10
-    })
+    }).subscribe()
   }
 
 }
