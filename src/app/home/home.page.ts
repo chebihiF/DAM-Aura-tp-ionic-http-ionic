@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private taskService: TaskService) {}
+
+  ionViewWillEnter(){
+    this.taskService.saveTask({
+      title: 'task title',
+      description: 'task description',
+      startDate: new Date(),
+      endDate: new Date(),
+      priority: 10
+    })
+  }
 
 }
