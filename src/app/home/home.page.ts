@@ -41,11 +41,13 @@ export class HomePage implements OnInit {
 
 
   ionViewWillEnter(){
-
+    this.taskService.getTasks().subscribe()
+    console.log(this.taskService.getData())
   }
 
   onCreateTask(){
-    console.log(this.form)
+    this.taskService.saveTask(this.form?.value).subscribe()
+    this.form?.reset()
   }
 
 }

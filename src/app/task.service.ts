@@ -1,12 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Task } from './task.model';
-import { tap } from 'rxjs';
+import { map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
+
+  private _tasks: Task[] = []
+
+  getData(){
+    return this._tasks;
+  }
 
   baseUrl = "https://ionic-app-dam-default-rtdb.firebaseio.com/"
 
@@ -27,7 +33,19 @@ export class TaskService {
   }
 
   getTasks() {
-
+    return this.http
+      .get<{[key:string]: Task}>(this.baseUrl+'tasks.json')
+      .pipe(map(resData => {
+        console.log(resData)
+        for(const key in resData){
+          if(resData.hasOwnProperty(key)){
+            const t:Task = new Task(resData[key].title, resData[key].description, new Date(resData[key].startDate),
+                        new Date(resData[key].endDate), +resData[key].priority)
+            t.id = key
+            this._tasks.push(t)
+          }
+        }
+      }))
   }
 
   getTaskById(){
