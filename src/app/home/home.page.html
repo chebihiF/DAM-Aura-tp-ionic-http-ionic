@@ -4,7 +4,7 @@
       Add task
     </ion-title>
     <ion-buttons slot="primary">
-      <ion-button (click)="onCreateTask()">
+      <ion-button (click)="onCreateTask()" [disabled]="!form?.valid">
         <ion-icon name="checkmark" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -28,6 +28,12 @@
             <ion-label position="floating">Description</ion-label>
             <ion-textarea rows="3" formControlName="description"></ion-textarea>
           </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row
+        *ngIf="!form?.get('description')?.valid && form?.get('description')?.touched">
+        <ion-col size-sm="6" offset-sm="3">
+          Description must note be longer than 180 characters
         </ion-col>
       </ion-row>
       <ion-row>
